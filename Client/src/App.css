@@ -1,0 +1,48 @@
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.main__heading {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: var(--dark);
+  margin-top: 1rem;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+.game__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.square__container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.player__turn {
+  display: flex;
+  justify-content: space-between;
+  width: 150%;
+}
+
+.player__turn--right,
+.player__turn--left {
+  background-color: var(--dark);
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  padding: 0.5rem 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
