@@ -6,6 +6,8 @@
   --background: #19b99a;
   --light: #e1f6f9;
   --dark: #555655;
+  --primary-blue: rgb(151, 181, 203);
+  --primary-pink: #c6a1ae;
 }
 
 * {

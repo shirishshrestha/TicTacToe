@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Square from "./Components/Square";
+import { io } from "socket.io-client";
 
 const renderForm = [
   [1, 2, 3],
@@ -7,7 +8,7 @@ const renderForm = [
   [7, 8, 9],
 ];
 
-const Game = () => {
+const Game = ({ opponentName, playerName, playingAs, socket }) => {
   const [gameState, setGameState] = useState(renderForm);
   const [currentPlayer, setCurrentPlayer] = useState("circle");
   const [finishedState, setFinishedState] = useState(false);
@@ -74,14 +75,41 @@ const Game = () => {
     window.location.reload();
   };
 
+  socket?.on("playerMoveFromServer", (data) => {
+    const id = data.state.id;
+    setGameState((prevState) => {
+      let newState = [...prevState];
+      const rowIndex = Math.floor(id / 3);
+      const colIndex = id % 3;
+      newState[rowIndex][colIndex] = data.state.sign;
+
+      return newState;
+    });
+    setCurrentPlayer(data.state.sign === "circle" ? "cross" : "circle");
+  });
+
+  socket?.on("opponentLeftMatch", () => {
+    setFinishedState("opponentLeftMatch");
+  });
+
   return (
     <>
       <div className="game__container">
         <div className="player__turn">
-          <div className="player__turn--left">
-            <p>Player 1</p>
+          <div
+            className={`player__turn--left ${
+              currentPlayer === playingAs ? "current-move-" + currentPlayer : ""
+            }`}
+          >
+            <p>{playerName}</p>
           </div>
-          <div className="player__turn--right">Opponent</div>
+          <div
+            className={`player__turn--right ${
+              currentPlayer !== playingAs ? "current-move-" + currentPlayer : ""
+            }`}
+          >
+            <p>{opponentName}</p>
+          </div>
         </div>
         <div className="square__container">
           {renderForm.map((arr, rowIndex) =>
@@ -89,24 +117,33 @@ const Game = () => {
               return (
                 <div className="square-div" key={colIndex}>
                   <Square
+                    socket={socket}
                     finishedStateArray={finishedStateArray}
                     currentPlayer={currentPlayer}
                     setCurrentPlayer={setCurrentPlayer}
                     finishedState={finishedState}
                     setGameState={setGameState}
                     id={rowIndex * 3 + colIndex}
+                    currentElement={elem}
+                    playingAs={playingAs}
                   />
                 </div>
               );
             })
           )}
         </div>
-        {finishedState && finishedState !== "draw" && (
-          <h3 className="winning-message">{finishedState} won the game</h3>
-        )}
-        {finishedState && finishedState === "draw" && (
-          <h3 className="winning-message">It's a Draw</h3>
-        )}
+        {finishedState &&
+          finishedState !== "opponentLeftMatch" &&
+          finishedState !== "draw" && (
+            <h3 className="winning-message">
+              {finishedState === playingAs ? "You" : finishedState} won the game
+            </h3>
+          )}
+        {finishedState &&
+          finishedState !== "opponentLeftMatch" &&
+          finishedState === "draw" && (
+            <h3 className="winning-message">It's a Draw</h3>
+          )}
 
         {finishedState ? (
           <div className="play-again">
@@ -114,6 +151,14 @@ const Game = () => {
           </div>
         ) : (
           <></>
+        )}
+
+        {!finishedState && opponentName && (
+          <h3>You are playing against {opponentName}</h3>
+        )}
+
+        {finishedState && finishedState === "opponentLeftMatch" && (
+          <h3>You won the match, Opponent has left </h3>
         )}
       </div>
     </>

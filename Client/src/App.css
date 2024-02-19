@@ -8,6 +8,34 @@ main {
   gap: 2rem;
 }
 
+.play-online {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn {
+  font-size: 3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.75rem 4.25rem;
+  font-family: "Happy Monkey", system-ui;
+  font-weight: 600;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 5px;
+}
+
+.waiting {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main__heading {
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -45,4 +73,12 @@ main {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
+}
+
+.current-move-cross {
+  background-color: var(--primary-pink) !important;
+}
+
+.current-move-circle {
+  background-color: var(--primary-blue) !important;
 }
