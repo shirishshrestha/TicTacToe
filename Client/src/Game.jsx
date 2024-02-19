@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Square from "./Components/Square";
-import { io } from "socket.io-client";
 
 const renderForm = [
   [1, 2, 3],

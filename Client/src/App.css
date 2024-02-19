@@ -82,3 +82,20 @@ main {
 .current-move-circle {
   background-color: var(--primary-blue) !important;
 }
+
+.waiting {
+  font-size: 3rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.play-again button {
+  background-color: var(--dark);
+  border: none;
+  border-radius: 5px;
+  color: var(--light);
+  padding: 0.5rem 3rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

@@ -40,8 +40,6 @@ const App = () => {
     setOpponentName(data.opponentName);
   });
 
-  
-
   const handlePlayOnline = async () => {
     const result = await inputPlayerName();
 
@@ -78,6 +76,9 @@ const App = () => {
     return (
       <main>
         <div className="waiting">
+          <figure>
+            <img src="../public/loading.svg" alt="" />
+          </figure>
           <p>Waiting for Opponent ...</p>
         </div>
       </main>
