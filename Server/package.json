@@ -1,5 +1,5 @@
 {
-  "script": {
+  "scripts": {
     "dev": "nodemon server.js",
     "build": "npm i"
   },
