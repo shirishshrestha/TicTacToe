@@ -2,7 +2,7 @@
   "name": "server",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "server.js",
     "build": "npm i"
   },
   "dependencies": {
