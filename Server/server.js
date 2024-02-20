@@ -3,7 +3,7 @@ const { createServer } = require("http");
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
-  cors: "https://tic-tac-toe-sandy-one.vercel.app/",
+  cors: "*",
 });
 
 const allUsers = {};
