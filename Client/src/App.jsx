@@ -3,6 +3,7 @@ import "./App.css";
 import Game from "./Game";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
+import { loading } from "./assets/Loading";
 
 const URL = import.meta.env.VITE_SERVER_URL;
 
@@ -77,7 +78,7 @@ const App = () => {
       <main>
         <div className="waiting">
           <figure>
-            <img src="../public/loading.svg" alt="" />
+            <img src={loading} alt="" />
           </figure>
           <p>Waiting for Opponent ...</p>
         </div>
