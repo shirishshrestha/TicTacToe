@@ -157,7 +157,7 @@ const Game = ({ opponentName, playerName, playingAs, socket }) => {
         )}
 
         {finishedState && finishedState === "opponentLeftMatch" && (
-          <h3>You won the match, Opponent has left </h3>
+          <h3>Opponent has left </h3>
         )}
       </div>
     </>
